@@ -1,4 +1,11 @@
-class GameScene extends Phaser.Scene {
+import Phaser from 'phaser';
+import PlayerContainer from '../classes/player/PlayerContainer';
+import Chest from '../classes/Chest';
+import Monster from '../classes/Monster';
+import Map from '../classes/Map';
+import GameManager from '../game_manager/GameManager';
+
+export default class GameScene extends Phaser.Scene {
   constructor() {
     super('Game');
   }
