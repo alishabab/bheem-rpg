@@ -1,0 +1,26 @@
+{
+  "name": "bheem-rpg",
+  "version": "1.0.0",
+  "description": "Bheem RPG game",
+  "main": "src/main.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "npm run build && webpack-dev-server --port=8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alishabab/bheem-rpg.git"
+  },
+  "author": "Shabab Ali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alishabab/bheem-rpg/issues"
+  },
+  "homepage": "https://github.com/alishabab/bheem-rpg#readme",
+  "devDependencies": {
+    "webpack-dev-server": "^2.11.0",
+    "webpack": "^3.4.1",
+    "raw-loader": "^0.5.1",
+    "phaser": "^3.3.0"
+  }
+}
