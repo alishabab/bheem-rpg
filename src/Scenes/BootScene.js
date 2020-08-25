@@ -34,7 +34,7 @@ export default class BootScene extends Phaser.Scene {
   }
 
   loadTileMap() {
-    this.load.tilemapTiledJSON('map', 'assets/level/large_level2.json');
+    this.load.tilemapTiledJSON('map', 'assets/level/large_level.json');
   }
 
   create () {

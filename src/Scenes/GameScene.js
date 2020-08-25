@@ -19,7 +19,6 @@ export default class GameScene extends Phaser.Scene {
     this.createAudio();
     this.createGroups();
     this.createInput();
-
     this.createGameManager();
   }
 
@@ -50,9 +49,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   createGroups() {
-    // create a chest group
     this.chests = this.physics.add.group();
-    // create a monster group
     this.monsters = this.physics.add.group();
     this.monsters.runChildUpdate = true;
   }
@@ -61,7 +58,6 @@ export default class GameScene extends Phaser.Scene {
     let chest = this.chests.getFirstDead();
     if (!chest) {
       chest = new Chest(this, chestObject.x * 2, chestObject.y * 2, 'items', 0, chestObject.gold, chestObject.id);
-      // add chest to chests group
       this.chests.add(chest);
     } else {
       chest.coins = chestObject.gold;
@@ -84,7 +80,6 @@ export default class GameScene extends Phaser.Scene {
         monsterObject.health,
         monsterObject.maxHealth,
       );
-      // add monster to monsters group
       this.monsters.add(monster);
     } else {
       monster.id = monsterObject.id;
@@ -101,13 +96,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
   addCollisions() {
-    // check for collisions between the player and the tiled blocked layer
     this.physics.add.collider(this.player, this.map.blockedLayer);
-    // check for overlaps between player and chest game objects
     this.physics.add.overlap(this.player, this.chests, this.collectChest, null, this);
-    // check for collisions between the monster group and the tiled blocked layer
     this.physics.add.collider(this.monsters, this.map.blockedLayer);
-    // check for overlaps between the player's weapon and monster game objects
     this.physics.add.overlap(this.player.weapon, this.monsters, this.enemyOverlap, null, this);
   }
 
@@ -119,13 +110,11 @@ export default class GameScene extends Phaser.Scene {
   }
 
   collectChest(player, chest) {
-    // play gold pickup sound
     this.goldPickupAudio.play();
     this.events.emit('pickUpChest', chest.id, player.id);
   }
 
   createMap() {
-    // create map
     this.map = new Map(this, 'map', 'background', 'background', 'blocked');
   }
 

@@ -13,7 +13,6 @@ export default class Monster extends Phaser.Physics.Arcade.Image {
     this.setCollideWorldBounds(true);
     this.scene.add.existing(this);
     this.setOrigin(0);
-
     this.createHealthBar();
   }
 
