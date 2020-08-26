@@ -17,8 +17,9 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
   create() {
+    const user = this.sys.game.globals.model.user;
     this.score = this.add.text(230, 30,
-      `your score is: ${this.sys.game.globals.model.score}`, {
+      `Hello ${user} your score is: ${this.sys.game.globals.model.score}`, {
         fontFamily: 'monospace',
         fontSize: 20,
         fontStyle: 'bold',
@@ -26,7 +27,7 @@ export default class GameOverScene extends Phaser.Scene {
         align: 'center',
       });
 
-    this.gameButton = new Button(this, 400, (config.height / 2) + 170,
-      'blueButton1', 'blueButton2', 'Submit', 'Score');
+    // this.gameButton = new Button(this, 400, (config.height / 2) + 170,
+    //   'blueButton1', 'blueButton2', 'Submit', 'Score');
   }
 }

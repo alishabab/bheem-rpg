@@ -1,18 +1,24 @@
 import Spawner from './Spawner';
 import PlayerModel from './PlayerModel';
-import { SpawnerType } from './utils';
+import { getTiledProperty, SpawnerType } from './utils';
 
 export default class GameManager {
   constructor(scene, mapData) {
     this.scene = scene;
     this.mapData = mapData;
+
     this.spawners = {};
     this.chests = {};
     this.monsters = {};
     this.players = {};
+
     this.playerLocations = [];
     this.chestLocations = {};
     this.monsterLocations = {};
+  }
+
+  init() {
+    this.model = this.sys.game.globals.model;
   }
 
   setup() {
@@ -26,22 +32,36 @@ export default class GameManager {
     this.mapData.forEach((layer) => {
       if (layer.name === 'player_locations') {
         layer.objects.forEach((obj) => {
-          this.playerLocations.push([obj.x, obj.y]);
+          this.playerLocations.push([obj.x + (obj.width / 2), obj.y - (obj.height / 2)]);
         });
       } else if (layer.name === 'chest_locations') {
         layer.objects.forEach((obj) => {
-          if (this.chestLocations[obj.properties.spawner]) {
-            this.chestLocations[obj.properties.spawner].push([obj.x, obj.y]);
+          const spawner = getTiledProperty(obj, 'spawner');
+          if (this.chestLocations[spawner]) {
+            this.chestLocations[spawner].push([
+              obj.x + (obj.width / 2),
+              obj.y - (obj.height / 2),
+            ]);
           } else {
-            this.chestLocations[obj.properties.spawner] = [[obj.x, obj.y]];
+            this.chestLocations[spawner] = [[
+              obj.x + (obj.width / 2),
+              obj.y - (obj.height / 2),
+            ]];
           }
         });
       } else if (layer.name === 'monster_locations') {
         layer.objects.forEach((obj) => {
-          if (this.monsterLocations[obj.properties.spawner]) {
-            this.monsterLocations[obj.properties.spawner].push([obj.x, obj.y]);
+          const spawner = getTiledProperty(obj, 'spawner');
+          if (this.monsterLocations[spawner]) {
+            this.monsterLocations[spawner].push([
+              obj.x + (obj.width / 2),
+              obj.y - (obj.height / 2),
+            ]);
           } else {
-            this.monsterLocations[obj.properties.spawner] = [[obj.x, obj.y]];
+            this.monsterLocations[spawner] = [[
+              obj.x + (obj.width / 2),
+              obj.y - (obj.height / 2),
+            ]];
           }
         });
       }
@@ -50,13 +70,10 @@ export default class GameManager {
 
   setupEventListener() {
     this.scene.events.on('pickUpChest', (chestId, playerId) => {
-
       if (this.chests[chestId]) {
         const { gold } = this.chests[chestId];
-
         this.players[playerId].updateGold(gold);
         this.scene.events.emit('updateScore', this.players[playerId].gold);
-
 
         this.spawners[this.chests[chestId].spawnerId].removeObject(chestId);
         this.scene.events.emit('chestRemoved', chestId);
@@ -64,37 +81,29 @@ export default class GameManager {
     });
 
     this.scene.events.on('monsterAttacked', (monsterId, playerId) => {
-
       if (this.monsters[monsterId]) {
         const { gold, attack } = this.monsters[monsterId];
 
         this.monsters[monsterId].loseHealth();
 
-
         if (this.monsters[monsterId].health <= 0) {
-
           this.players[playerId].updateGold(gold);
           this.scene.events.emit('updateScore', this.players[playerId].gold);
-
 
           this.spawners[this.monsters[monsterId].spawnerId].removeObject(monsterId);
           this.scene.events.emit('monsterRemoved', monsterId);
 
-
           this.players[playerId].updateHealth(2);
-          this.scene.events.emit('updatePlayerHealth', playerId, this.players[playerId].health);
         } else {
           this.players[playerId].updateHealth(-attack);
           this.scene.events.emit('updatePlayerHealth', playerId, this.players[playerId].health);
 
-
           this.scene.events.emit('updateMonsterHealth', monsterId, this.monsters[monsterId].health);
 
-
+          /* eslint-disable radix */
           if (this.players[playerId].health <= 0) {
-
-            this.players[playerId].updateGold(parseInt(-this.players[playerId].gold / 2), 10);
-            this.scene.events.emit('updateScore', this.players[playerId].gold);
+            // this.players[playerId].updateGold(parseInt(-this.players[playerId].gold / 2), 10);
+            // this.scene.events.emit('updateScore', this.players[playerId].gold);
 
             this.players[playerId].respawn();
             this.scene.events.emit('respawnPlayer', this.players[playerId]);
@@ -111,26 +120,24 @@ export default class GameManager {
       spawnerType: SpawnerType.CHEST,
       id: '',
     };
-    let spawner;
 
     Object.keys(this.chestLocations).forEach((key) => {
       config.id = `chest-${key}`;
 
-      spawner = new Spawner(
+      const spawner = new Spawner(
         config,
         this.chestLocations[key],
         this.addChest.bind(this),
-        this.deleteChest.bind(this)
+        this.deleteChest.bind(this),
       );
       this.spawners[spawner.id] = spawner;
     });
 
-    // create monster spawners
     Object.keys(this.monsterLocations).forEach((key) => {
       config.id = `monster-${key}`;
       config.spawnerType = SpawnerType.MONSTER;
 
-      spawner = new Spawner(
+      const spawner = new Spawner(
         config,
         this.monsterLocations[key],
         this.addMonster.bind(this),

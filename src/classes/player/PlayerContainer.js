@@ -21,19 +21,24 @@ export default class PlayerContainer extends Phaser.GameObjects.Container {
     this.maxHealth = maxHealth;
     this.id = id;
     this.attackAudio = attackAudio;
+
     this.setSize(64, 64);
     this.scene.physics.world.enable(this);
+
     this.body.setCollideWorldBounds(true);
     this.scene.add.existing(this);
     this.scene.cameras.main.startFollow(this);
+
     this.player = new Player(this.scene, 0, 0, key, frame);
     this.add(this.player);
+
     this.weapon = this.scene.add.image(40, 0, 'items', 4);
     this.scene.add.existing(this.weapon);
     this.weapon.setScale(1.5);
     this.scene.physics.world.enable(this.weapon);
     this.add(this.weapon);
     this.weapon.alpha = 0;
+
     this.createHealthBar();
   }
 
@@ -46,6 +51,7 @@ export default class PlayerContainer extends Phaser.GameObjects.Container {
     this.healthBar.clear();
     this.healthBar.fillStyle(0xffffff, 1);
     this.healthBar.fillRect(this.x - 32, this.y - 40, 64, 5);
+
     this.healthBar.fillGradientStyle(0xff0000, 0xffffff, 4);
     this.healthBar.fillRect(this.x - 32, this.y - 40, 64 * (this.health / this.maxHealth), 5);
   }
@@ -68,6 +74,7 @@ export default class PlayerContainer extends Phaser.GameObjects.Container {
 
   update(cursors) {
     this.body.setVelocity(0);
+
     if (cursors.left.isDown) {
       this.body.setVelocityX(-this.velocity);
       this.currentDirection = Direction.LEFT;

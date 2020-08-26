@@ -12,9 +12,7 @@ export default class Spawner {
     this.addObject = addObject;
     this.deleteObject = deleteObject;
     this.moveObjects = moveObjects;
-
     this.objectsCreated = [];
-
     this.start();
   }
 

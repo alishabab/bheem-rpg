@@ -13,7 +13,7 @@ export default class TitleScene extends Phaser.Scene {
       'Bheem', { fontSize: '64px', fill: '#fff' });
     this.titleText.setOrigin(0.5);
     // Game
-    this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Game');
+    this.gameButton = new Button(this, config.width/2, config.height/2 - 100, 'blueButton1', 'blueButton2', 'Play', 'Guide');
 
     // Options
     this.optionsButton = new Button(this, config.width/2, config.height/2, 'blueButton1', 'blueButton2', 'Options', 'Options');
