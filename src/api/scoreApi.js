@@ -1,4 +1,4 @@
-const baseUrl = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api/';
+const baseUrl = 'https://us-central1-js-capstone-backend.cloudfunctions.net/api';
 const gameId = 'XFEg8of4rdnqIVzbT4p3';
 
 export const postScore = async (name, score) => {
@@ -6,12 +6,13 @@ export const postScore = async (name, score) => {
     method: 'POST',
       mode: 'cors',
       headers: {
-      Accept: 'Application/json',
-               'Content-Type': 'application/json',
+        Accept: 'Application/json',
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify({user: name, score: score})
+      body: JSON.stringify({user: name, score: Number(score)})
   })
   if (response.ok) {
+    console.log(response)
     return response.json()
   } else {
     throw new Error("Something went wrong!")
@@ -19,7 +20,14 @@ export const postScore = async (name, score) => {
 }
 
 export const getScores = async () => {
-  const response = await fetch(`${baseUrl}/games/${gameId}/scores`)
+  const response = await fetch(`${baseUrl}/games/${gameId}/scores`, {
+    method: 'Get',
+    mode: 'cors',
+    headers: {
+      Accept: 'Application/json',
+      'Content-Type': 'application/json',
+    },
+  })
   if (response.ok) {
     return response.json()
   } else {

@@ -25,7 +25,7 @@ export default class GuideScene extends Phaser.Scene {
     input.scaleY = 0.6;
 
     const style = 'background: url(assets/images/ui/blue_button02.png); border: none; border-radius: 5px; color: #fff;';
-    const gameButton = this.add.dom(590, 412, 'button', style, 'Play');
+    const gameButton = this.add.dom(600, 412, 'button', style, 'Play');
     gameButton.scaleX = 1.5;
     gameButton.scaleY = 1.7;
     gameButton.addListener('click');
@@ -34,7 +34,7 @@ export default class GuideScene extends Phaser.Scene {
       if (input.node.value) {
         this.model = this.sys.game.globals.model;
         this.model.user = input.node.value;
-        this.scene.start('GameOver');
+        this.scene.start('Game');
       }
     });
   }

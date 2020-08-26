@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Button from '../Objects/Button';
 import config from '../Config/config';
+import { getScores, postScore } from '../api/scoreApi';
 
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
@@ -26,8 +27,8 @@ export default class GameOverScene extends Phaser.Scene {
         color: '#ffffff',
         align: 'center',
       });
-
-    // this.gameButton = new Button(this, 400, (config.height / 2) + 170,
-    //   'blueButton1', 'blueButton2', 'Submit', 'Score');
+      postScore(this.model.user, this.model.score);
+    this.gameButton = new Button(this, 400, (config.height / 2) + 170,
+      'blueButton1', 'blueButton2', 'Submit Score', 'Leaderboard');
   }
 }
