@@ -23,7 +23,7 @@ export default class DisplayScoreScene extends Phaser.Scene {
       result.sort((x, y) => y.score - x.score);
       const space = 40;
       for (let i = 0; i < 5; i += 1) {
-        if (result[i] !== undefined) {
+        if (result[i]) {
           this.add.text(60, 200 + (space * i),
             `${i + 1}. Name: ${result[i].user} -- Score: ${result[i].score}`,
             scoreStyle);

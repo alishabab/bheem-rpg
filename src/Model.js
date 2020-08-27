@@ -30,7 +30,7 @@ export default class Model {
   get bgMusicPlaying() {
     return this._bgMusicPlaying;
   }
-
+  
   set score(value) {
     this._score = value;
   }

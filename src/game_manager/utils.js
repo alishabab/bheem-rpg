@@ -9,8 +9,8 @@ export function randomNumber(min, max) {
 }
 
 export function getTiledProperty(obj, propertyName) {
-  for (let propertyIndex = 0; propertyIndex < obj.properties.length; propertyIndex += 1) {
-    const property = obj.properties[propertyIndex];
+  for (let i = 0; i < obj.properties.length; i += 1) {
+    const property = obj.properties[i];
     if (property.name === propertyName) {
       return property.value;
     }

@@ -22,7 +22,7 @@ export default class Spawner {
         this.spawnObject();
       }
     }, this.spawnInterval);
-    if (this.objectType === SpawnerType.MONSTER) this.moveMonsters();
+    if (this.objectType === SpawnerType.MONSTER && this.objectsCreated.length >= 0) this.moveMonsters();
   }
 
   spawnObject() {
@@ -74,12 +74,11 @@ export default class Spawner {
   }
 
   moveMonsters() {
-    this.moveMonsterInterval = setInterval(() => {
-      this.objectsCreated.forEach((monster) => {
-        monster.move();
-      });
-
-      this.moveObjects();
-    }, 1000);
+      this.moveMonsterInterval = setInterval(() => {
+          this.objectsCreated.forEach((monster) => {
+            monster.move();
+          });
+        this.moveObjects();
+      }, 1000);
   }
 }

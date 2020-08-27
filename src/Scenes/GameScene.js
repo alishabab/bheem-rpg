@@ -12,6 +12,7 @@ export default class GameScene extends Phaser.Scene {
 
   init() {
     this.scene.launch('Ui');
+    this.model = this.sys.game.globals.model;
   }
 
   create() {
@@ -40,7 +41,7 @@ export default class GameScene extends Phaser.Scene {
       playerObject.x * 2,
       playerObject.y * 2,
       'characters',
-      0,
+      4,
       playerObject.health,
       playerObject.maxHealth,
       playerObject.id,
@@ -110,7 +111,7 @@ export default class GameScene extends Phaser.Scene {
   }
 
   collectChest(player, chest) {
-    this.goldPickupAudio.play();
+    if (this.model.soundOn) this.goldPickupAudio.play();
     this.events.emit('pickUpChest', chest.id, player.id);
   }
 
@@ -144,7 +145,7 @@ export default class GameScene extends Phaser.Scene {
       this.monsters.getChildren().forEach((monster) => {
         if (monster.id === monsterId) {
           monster.makeInactive();
-          this.monsterDeathAudio.play();
+          if (this.model.soundOn) this.monsterDeathAudio.play();
         }
       });
     });
@@ -158,24 +159,26 @@ export default class GameScene extends Phaser.Scene {
     });
 
     this.events.on('monsterMovement', (monsters) => {
-      this.monsters.getChildren().forEach((monster) => {
-        Object.keys(monsters).forEach((monsterId) => {
-          if (monster.id === monsterId) {
-            this.physics.moveToObject(monster, monsters[monsterId], 40);
-          }
+      if (this.monsters.children) {
+        this.monsters.getChildren().forEach((monster) => {
+          Object.keys(monsters).forEach((monsterId) => {
+            if (monster.id === monsterId) {
+              this.physics.moveToObject(monster, monsters[monsterId], 40);
+            }
+          });
         });
-      });
+      }  
     });
 
     this.events.on('updatePlayerHealth', (playerId, health) => {
       if (health < this.player.health) {
-        this.playerDamageAudio.play();
+        if (this.model.soundOn) this.playerDamageAudio.play();
       }
       this.player.updateHealth(health);
     });
 
     this.events.on('respawnPlayer', (playerObject) => {
-      this.playerDeathAudio.play();
+      if (this.model.soundOn) this.playerDeathAudio.play();
       this.player.respawn(playerObject);
     });
 
