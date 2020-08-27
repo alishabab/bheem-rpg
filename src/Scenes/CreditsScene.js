@@ -1,24 +1,24 @@
-import 'phaser';
+import Phaser from 'phaser';
 import config from '../Config/config';
 
 export default class CreditsScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Credits');
   }
 
-  create () {
+  create() {
     this.creditsText = this.add.text(0, 0, 'Credits', { fontSize: '32px', fill: '#fff' });
     this.madeByText = this.add.text(0, 0, 'Created By: Shabab Ali', { fontSize: '26px', fill: '#fff' });
-    this.zone = this.add.zone(config.width/2, config.height/2, config.width, config.height);
+    this.zone = this.add.zone(config.width / 2, config.height / 2, config.width, config.height);
 
     Phaser.Display.Align.In.Center(
       this.creditsText,
-      this.zone
+      this.zone,
     );
 
     Phaser.Display.Align.In.Center(
       this.madeByText,
-      this.zone
+      this.zone,
     );
 
     this.madeByText.setY(1000);
@@ -29,9 +29,10 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 3000,
       delay: 1000,
-      onComplete: function () {
+      onComplete() {
+        // eslint-disable-next-line no-unused-expressions
         this.destroy;
-      }
+      },
     });
 
     this.madeByTween = this.tweens.add({
@@ -40,10 +41,12 @@ export default class CreditsScene extends Phaser.Scene {
       ease: 'Power1',
       duration: 8000,
       delay: 1000,
+      // eslint-disable-next-line func-names
       onComplete: function () {
+        // eslint-disable-next-line no-unused-expressions
         this.madeByTween.destroy;
         this.scene.start('Title');
-      }.bind(this)
+      }.bind(this),
     });
   }
-};
+}

@@ -1,15 +1,15 @@
-import 'phaser';
+import Phaser from 'phaser';
 
 export default class BootScene extends Phaser.Scene {
-  constructor () {
+  constructor() {
     super('Boot');
   }
 
-  preload () {
-     this.loadImages();
-     this.loadSpriteSheets();
-     this.loadAudio();
-     this.loadTileMap();
+  preload() {
+    this.loadImages();
+    this.loadSpriteSheets();
+    this.loadAudio();
+    this.loadTileMap();
   }
 
   loadImages() {
@@ -37,7 +37,7 @@ export default class BootScene extends Phaser.Scene {
     this.load.tilemapTiledJSON('map', 'assets/level/large_level.json');
   }
 
-  create () {
+  create() {
     this.scene.start('Preloader');
   }
-};
+}

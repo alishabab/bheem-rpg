@@ -1,4 +1,4 @@
-import 'phaser';
+import Phaser from 'phaser';
 import config from './Config/config';
 import GameScene from './Scenes/GameScene';
 import BootScene from './Scenes/BootScene';
@@ -10,10 +10,10 @@ import GuideScene from './Scenes/GuideScene';
 import Model from './Model';
 import UiScene from './Scenes/UiScene';
 import GameOverScene from './Scenes/GameOverScene';
-import LeaderboardScene from './Scenes/LeaderboardScene'
+import LeaderboardScene from './Scenes/LeaderboardScene';
 
 class Game extends Phaser.Game {
-  constructor () {
+  constructor() {
     super(config);
     const model = new Model();
     this.globals = { model, bgMusic: null };
@@ -26,7 +26,7 @@ class Game extends Phaser.Game {
     this.scene.add('Game', GameScene);
     this.scene.add('Ui', UiScene);
     this.scene.add('GameOverScene', GameOverScene);
-    this.scene.add('LeaderboardScene',LeaderboardScene);
+    this.scene.add('LeaderboardScene', LeaderboardScene);
     this.scene.start('Boot');
   }
 }

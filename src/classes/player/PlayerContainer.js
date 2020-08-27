@@ -77,7 +77,6 @@ export default class PlayerContainer extends Phaser.GameObjects.Container {
   //     this.scene.scene.start('GameOver');
   //   }
 
- 
   // respawn(playerObject) {
   //   this.health = playerObject.health;
   //   this.setPosition(playerObject.x, playerObject.y);

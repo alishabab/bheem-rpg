@@ -128,7 +128,7 @@ export default class GameManager {
         config,
         this.chestLocations[key],
         this.addChest.bind(this),
-        this.deleteChest.bind(this)
+        this.deleteChest.bind(this),
       );
       this.spawners[spawner.id] = spawner;
     });

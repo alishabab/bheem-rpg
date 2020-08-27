@@ -7,7 +7,6 @@ export default class GuideScene extends Phaser.Scene {
   }
 
   create() {
-
     this.textInstructions = this.add.text(210, 270,
       'Use the direction keys to navigate'
       + '\nUse the space key to attack monsters',

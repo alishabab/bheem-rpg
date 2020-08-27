@@ -18,9 +18,9 @@ export default class PlayerModel {
 
   updateHealth(health) {
     this.health += health;
-    if (this.health > 10){
+    if (this.health > 10) {
       this.health = 10;
-    } 
+    }
   }
 
   respawn() {

@@ -14,7 +14,7 @@ export default class DisplayScoreScene extends Phaser.Scene {
     }).setOrigin(0.5, 0.5);
 
     getScores().then((scores) => {
-      const result = scores.result
+      const { result } = scores;
       const scoreStyle = {
         color: 'white',
         fontSize: '38px ',

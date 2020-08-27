@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
 import Button from '../Objects/Button';
 import config from '../Config/config';
-import { postScore } from '../api/scoreApi';
+// import { postScore } from '../api/scoreApi';
 
 export default class GameOverScene extends Phaser.Scene {
   constructor() {
@@ -13,9 +13,9 @@ export default class GameOverScene extends Phaser.Scene {
   }
 
   create() {
-    const user = this.sys.game.globals.model.user;
+    const { user } = this.sys.game.globals.model;
     this.add.text(230, 30,
-      `Game Over`, {
+      'Game Over', {
         fontFamily: 'monospace',
         fontSize: 40,
         fontStyle: 'bold',
@@ -30,7 +30,7 @@ export default class GameOverScene extends Phaser.Scene {
         color: '#ffffff',
         align: 'center',
       });
-      // postScore(this.model.user, this.model.score);
+    // postScore(this.model.user, this.model.score);
     this.gameButton = new Button(this, 400, (config.height / 2) + 170,
       'blueButton1', 'blueButton2', 'Submit Score', 'Leaderboard');
   }

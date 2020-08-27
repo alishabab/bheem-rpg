@@ -167,7 +167,7 @@ export default class GameScene extends Phaser.Scene {
             }
           });
         });
-      }  
+      }
     });
 
     this.events.on('updatePlayerHealth', (playerId, health) => {
