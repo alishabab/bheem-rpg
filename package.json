@@ -1,0 +1,40 @@
+{
+  "name": "bheem-rpg",
+  "version": "1.0.0",
+  "description": "Bheem RPG game",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "jest --watch",
+    "build": "webpack",
+    "start": "npm run build && webpack-dev-server --port=8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alishabab/bheem-rpg.git"
+  },
+  "author": "Shabab Ali",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alishabab/bheem-rpg/issues"
+  },
+  "homepage": "https://github.com/alishabab/bheem-rpg#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.11.0",
+    "canvas": "^2.6.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "jest": "^26.4.0",
+    "raw-loader": "^0.5.1",
+    "stylelint": "^13.3.3",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-csstree-validator": "^1.8.0",
+    "stylelint-scss": "^3.17.2",
+    "webpack": "^3.4.1",
+    "webpack-dev-server": "^2.11.0"
+  },
+  "dependencies": {
+    "phaser": "^3.3.0",
+    "uuid": "^8.3.0"
+  }
+}
